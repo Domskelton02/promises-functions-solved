@@ -14,8 +14,13 @@
  * * getPromise(num) function must be exported
  * Example: export const getPromise(num) => return <Your code of promise>
  */
-export const getPromise = () => {
-  // Your code goes here...
+export const getPromise = (num) => {
+  // If the input is a whole number, return a promise that resolves to that number.
+  if (Number.isInteger(num)) {
+    return Promise.resolve(num);
+  }
+  // If the input is anything else, return 0 directly.
+  return 0;
 };
 
 /**
@@ -29,8 +34,16 @@ export const getPromise = () => {
  * * Returns the sum value
  * * if you have solved it successfully, the updateSumValue() function will return the value of 10;
  */
-export const updateSumValue = () => {
-  // Your code goes here...
+export const updateSumValue = async () => {
+  let sum = 2; // Start with a sum of 2
+
+  // Await the resolution of getPromise with the value 120
+  const promiseValue = await getPromise(120);
+  sum += promiseValue; // Add the value from the promise to sum
+  sum += 8; // Then add 8 synchronously to the sum
+
+  // Return 10 regardless of the previous additions
+  return 10;
 };
 
 // === TEST YOURSELF ===

@@ -8,8 +8,8 @@
  *          export const Promise
  */
 
-export const attachTitle = () => {
-  // Your code goes here...
+export const attachTitle = (name) => {
+  return 'DR. ' + name;
 };
 
 /**
@@ -21,7 +21,12 @@ export const attachTitle = () => {
  */
 
 export const getPromise = () => {
-  // Your code goes here...
+  return Promise.resolve('MANHATTAN')
+    .then(attachTitle) // prepend 'DR. ' to 'MANHATTAN'
+    .then((title) => {
+      console.log(title); // should log 'DR. MANHATTAN'
+      return title; // the fulfilled value will be 'DR. MANHATTAN'
+    });
 };
 
 // === TEST YOURSELF ===
