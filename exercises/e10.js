@@ -24,7 +24,8 @@ export const promiseArr = [promise1, promise2, promise3, promise4];
  */
 
 // Your code goes here...
-export const handlePromise1 = Promise.any(promiseArr).catch((e) => e);
+export const handlePromise1 = Promise.all(promiseArr).then((value) => value).catch((reason) => reason);
+
 
 /**
  * @task
@@ -41,6 +42,12 @@ export const handlePromise1 = Promise.any(promiseArr).catch((e) => e);
  */
 
 // Your code goes here...
+export function handlePromise2(promises) {
+  return Promise.any(promises)
+    .then((value) => value)
+    .catch((error) => error);
+}
+
 
 /**
  * @task
@@ -57,6 +64,9 @@ export const handlePromise1 = Promise.any(promiseArr).catch((e) => e);
  */
 
 // Your code goes here...
+export function handlePromise3(promises) {
+  return Promise.allSettled(promises).then((results) => results.map((result) => ({ status: result.status, value: result.value, reason: result.reason })));
+}
 
 /**
  * @task
@@ -66,7 +76,8 @@ export const handlePromise1 = Promise.any(promiseArr).catch((e) => e);
  * The value of newPromiseArr MUST have more than one promise in the array!
  */
 
-export const newPromiseArr = promiseArr.filter(/* <Your code goes here>*/);
+export const newPromiseArr = promiseArr.filter((promise) => promise !== promise1 && promise !== promise2 && promise !== promise3);
+
 
 // Do NOT refactor or update handlePromise4 function, it's all set to work
 export const handlePromise4 = (arr) => {

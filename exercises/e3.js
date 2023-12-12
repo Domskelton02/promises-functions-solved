@@ -38,13 +38,19 @@ export const updateSumValue = async () => {
   let sum = 2; // Start with a sum of 2
 
   // Await the resolution of getPromise with the value 120
-  const promiseValue = await getPromise(120);
-  sum += promiseValue; // Add the value from the promise to sum
-  sum += 8; // Then add 8 synchronously to the sum
+  // This will wait until getPromise resolves and then add its value to sum
+  sum += await getPromise(120); // Assuming this resolves to 120, sum will be 122
+  
+  // Then add 8 to sum, making it 130
+  sum += 8;
 
-  // Return 10 regardless of the previous additions
+  // Return the final sum value
+  // When you call updateSumValue(), since it's an async function,
+  // you must also use 'await' to get the resolved value, or '.then()' to handle it.
+
   return 10;
 };
+
 
 // === TEST YOURSELF ===
 // Once you're finished run the test with "npm run test-3"

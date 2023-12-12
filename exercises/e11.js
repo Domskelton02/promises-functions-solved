@@ -26,10 +26,9 @@ export const usersUrl = 'http://localhost:3000/users/';
  * Example: const getLoginList = (data) => {<Your code>}
 */
 
-const getLoginList = () => {
-  // Your code goes here...
-
-}
+const getLoginList = (data) => {
+  return data.map(user => user.login);
+};
 
 /**
  * @task 
@@ -39,7 +38,9 @@ const getLoginList = () => {
 */
 
 // Your code goes here ...
-const getData;
+const getData =  fetch(usersUrl)
+  .then(response => response.json())
+  .catch(err => console.error('Error fetching data: ', err));
 
 /**
  * @task 
@@ -53,7 +54,13 @@ const getData;
 */
 
 // Your code goes here ...
-export const result = getData;
+export const result = getData
+.then(data => {
+  const logins  = getLoginList(data);
+  console.log(logins);
+  return logins;
+})
+.catch(error => console.error('Error processing data', error));
 
 
 // === TEST YOURSELF ===
