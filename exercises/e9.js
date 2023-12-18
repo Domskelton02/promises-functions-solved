@@ -37,11 +37,8 @@ export function alwaysThrows() {
  */
 
 export function onReject(error) {
-  if (typeof error === 'object' && error.message) {
-    console.log(error.message);
-  } else {
-    console.log(error);
-  }
+const valueToLog = error.message ? error.message : error;
+console.log(valueToLog);
 }
 
 /**
@@ -66,13 +63,13 @@ export function onReject(error) {
  */
 
 // Your code goes here...
-export const promise = Promise.resolve()
-.then(iterate)
+export const promise = Promise.resolve(iterate(1))
 .then(iterate)
 .then(iterate)
 .then(iterate)
 .then(iterate)
 .then(alwaysThrows)
+.then(iterate)
 .then(iterate)
 .then(iterate)
 .then(iterate)

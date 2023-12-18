@@ -39,8 +39,6 @@ const getLoginList = (data) => {
 
 // Your code goes here ...
 const getData =  fetch(usersUrl)
-  .then(response => response.json())
-  .catch(err => console.error('Error fetching data: ', err));
 
 /**
  * @task 
@@ -55,12 +53,13 @@ const getData =  fetch(usersUrl)
 
 // Your code goes here ...
 export const result = getData
-.then(data => {
+.then((res) => res.json())
+.then((data) => {
   const logins  = getLoginList(data);
   console.log(logins);
   return logins;
 })
-.catch(error => console.error('Error processing data', error));
+.catch((error) => console.error("Error processing data", error));
 
 
 // === TEST YOURSELF ===

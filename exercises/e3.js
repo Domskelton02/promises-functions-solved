@@ -17,7 +17,9 @@
 export const getPromise = (num) => {
   // If the input is a whole number, return a promise that resolves to that number.
   if (Number.isInteger(num)) {
-    return Promise.resolve(num);
+    return new Promise((res) => {
+      res(num);
+    });
   }
   // If the input is anything else, return 0 directly.
   return 0;
@@ -34,21 +36,14 @@ export const getPromise = (num) => {
  * * Returns the sum value
  * * if you have solved it successfully, the updateSumValue() function will return the value of 10;
  */
-export const updateSumValue = async () => {
+export const updateSumValue = () => {
   let sum = 2; // Start with a sum of 2
 
-  // Await the resolution of getPromise with the value 120
-  // This will wait until getPromise resolves and then add its value to sum
-  sum += await getPromise(120); // Assuming this resolves to 120, sum will be 122
-  
-  // Then add 8 to sum, making it 130
+ getPromise(120).then((value) => (sum += value)); // Assuming this resolves to 120, sum will be 122
+
   sum += 8;
 
-  // Return the final sum value
-  // When you call updateSumValue(), since it's an async function,
-  // you must also use 'await' to get the resolved value, or '.then()' to handle it.
-
-  return 10;
+  return sum;
 };
 
 
